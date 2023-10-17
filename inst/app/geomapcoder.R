@@ -42,6 +42,34 @@ pacman::p_load(shiny,
 # Use pacman to install and load packages from Github:
 pacman::p_load_gh("datasketch/shi18ny")
 
+# Function to get region names:
+get_region <- function(lat, 
+                       long, 
+                       shapefile, 
+                       col2return){
+  
+  # Switch off spherical geometry:
+  sf_use_s2(use_s2 = FALSE)
+  
+  # Create point object from coordinates:
+  mypoint = st_point(c(long, lat)) %>% 
+    st_zm()
+  
+  # Get region name or code:
+  region = shapefile %>% 
+    filter(st_contains(x = geometry,
+                       y = mypoint,
+                       sparse = FALSE, 
+                       model = "closed") == 1) %>% 
+    st_drop_geometry() %>% 
+    select(all_of(col2return)) %>% 
+    pull()
+  
+  # Return region name or code:
+  return(region)
+  
+}
+
 
 # Specify URL source for leaflet map awesome markers:
 icon_url <- "https://raw.githubusercontent.com/rstudio/leaflet/main/docs/libs/leaflet/images/marker-icon.png"
@@ -50,7 +78,9 @@ icon_url <- "https://raw.githubusercontent.com/rstudio/leaflet/main/docs/libs/le
 # Create empty data.frame to hold results:
 tab <- na.omit(data.frame(ID = NA_character_, 
                           Latitude = NA_real_,
-                          Longitude = NA_real_))
+                          Longitude = NA_real_, 
+                          Region = NA_character_, 
+                          Code = NA_character_))
 
 
 # Create UI ---------------------------------------------------------------
@@ -330,18 +360,23 @@ server <- function(input, output, session) {
   })
 
   # Use file path to read in shape file as a reactive:
-  user_shp <- eventReactive(input$addshapefile, {
+   user_shp <- eventReactive(input$addshapefile, {
     
-    if(nrow(file_selected()) > 0 & file.exists(file_selected()$datapath)) {
+    if(!is.null(file_selected()) && 
+       nrow(file_selected()) > 0 &&
+       file.exists(file_selected()$datapath)) {
       
       sf::st_read(dsn = file_selected()$datapath)
       
-    } 
-    
+    } else {
+      NULL
+    }
   })
   
+  
   # Get column names from shapefile:
-  observeEvent(input$addshapefile, {
+   
+  eventReactive(input$addshapefile, {
     
     if(!is.null(user_shp())) {
       
@@ -506,34 +541,37 @@ server <- function(input, output, session) {
     )
   }) 
   
-  
+
+  # Add region names and codes if shapefile is provided:
   observeEvent(input$addshapefile, {
-    
+
     if(!is.null(user_shp())) {
+
+      # Create a new table to hold the updates:
+      new_tab <- tab() %>%
+        
+        # Iterate by row to add region names and codes:
+        rowwise() %>%
+        
+        # Add region name:
+        mutate(Region = get_region(lat = Latitude, 
+                                   long = Longitude, 
+                                   shapefile = user_shp(), 
+                                   col2return = sf_names())) %>% 
+        
+        # Add region code:
+        mutate(Code = get_region(lat = Latitude, 
+                                 long = Longitude, 
+                                 shapefile = user_shp(), 
+                                 col2return = sf_pcodes()))
       
-      tab <- tab %>% 
-        
-        # Convert to sf:
-        st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>% 
-        
-        # Use same projection as for quartiers:
-        st_transform(st_crs(user_shp())) %>%
-        
-        # Join the two files together using the intersection:
-        st_join(user_shp(), join = st_intersects) %>% 
-        
-        # Drop geometry:
-        sf::st_drop_geometry() %>% 
-        
-        # Select columns:
-        select(ID, 
-               Latitude, 
-               Longitude, 
-               all_of(sf_names()), 
-               all_of(sf_pcodes()))
-      
+
+
+        # Update the table with the region names:
+        tab(new_tab)
+
     }
-    
+
   })
   
   
@@ -545,8 +583,8 @@ server <- function(input, output, session) {
                 url = 'https://cdn.datatables.net/plug-ins/1.10.11/i18n/French.json')))
   })
   
-  
-  
+
+
   #########################################
   # ADD RESULTS DOWNLOAD BUTTON
 
