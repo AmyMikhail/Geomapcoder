@@ -1,6 +1,6 @@
 Geomapcoder
 ================
-06 October 2023
+25 June 2024
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -10,14 +10,14 @@ Geomapcoder
 
 The `Geomapcoder` app has been developed to support epidemiologists
 conducting disease surveillance or outbreak investigations in settings
-where there is no postal code and it is difficult to accurately
-geolocate cases, but where an understanding of spatial distribution is
-essential for the implementation of effective control measures.
+where it is difficult to accurately geolocate cases, but where an
+understanding of spatial distribution is essential for the
+implementation of effective control measures.
 
 Specifically, this app may be most useful to data entry clerks, health
 facility reception staff, or survey teams, who know the areas their
 patients are coming from (or other points of interest) well enough to
-visually locate them on a high resolution map.
+visually locate them on a high resolution interactive map.
 
 ### How it works:
 
@@ -31,21 +31,26 @@ trigger a dialogue box to appear, where the user can type in an
 identifier for this point (for example the patient ID number). The table
 underneath the map will automatically be populated by the identifier and
 GPS coordinates. This process can be repeated for different addresses as
-many times as necessary. At the end, the user can export the table with
-identifiers and coordinates to a .csv file. The .csv file can then be
-uploaded to or merged with other databases based on the common
-identifier.
+many times as necessary.
 
-Optionally, the user can choose to upload shapefiles for an
-administrative level of interest (for example level 1 regions of a
-country). Admin level 4 (quartier) shapefiles for Haiti are included as
-an example, but users can also upload their own shapefiles for any other
-country or administrative level. In this case, the region borders will
-be superimposed on the map and the user can click on each one to see the
-region name. In addition, the table below the map will automatically be
-populated with the region name and code for each recorded point of
-interest. A static version of the resultant map can also be downloaded,
-if desired.
+Optionally, the user can choose to upload shapefiles with boundaries
+(polygons) for an administrative level of interest (for example level 2
+regions of a country). Shapefiles for four administrative levels for
+Haiti are included as an example, but users can also upload their own
+shapefiles for any other country. The table below the map will
+automatically be populated with the region name and code for each
+recorded point of interest.
+
+At the end, the user can export the table with identifiers and
+coordinates to a .csv file. The .csv file can then be uploaded to or
+merged with other databases based on the common identifier.
+
+<figure>
+<img src="inst/images/geomapcoder_screenshot.png"
+alt="Screenshot of GeomapcodeR app displaying two locations in Haiti" />
+<figcaption aria-hidden="true">Screenshot of GeomapcodeR app displaying
+two locations in Haiti</figcaption>
+</figure>
 
 ### Example use cases:
 
@@ -82,12 +87,12 @@ using Github codespaces in the future.
 
 ### Special features and future developments:
 
-This app is being developed as a multilingual app. At present, users can
-choose between French and English. In the future, Spanish, Arabic and
-Russian will be added. Note that the app was developed in French in the
-first instance. It uses the `sh18y` family of packages as well as
-`deeplr` for automated translation. If you spot any translation errors,
-please raise an issue (see below).
+This app is being developed as a multilingual app. Users can choose
+between English, French, Spanish, Russian and Arabic (the five UN
+languages) by clicking on the relevant language button at the top right
+of the app. This will trigger all text and button labels in the app to
+be refreshed and shown in the selected language. If you spot any
+translation errors, please raise an issue (see below).
 
 ### Reporting errors and bugs or requesting enhancements:
 

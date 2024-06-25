@@ -1,0 +1,208 @@
+{
+  "languages": ["en", "fr", "es", "ru", "ar"],
+  "translation": [
+     {
+      "en": "Enter a country name:",
+      "fr": "Entrez le nom d'un pays :",
+      "es": "Ingrese el nombre de un país:",
+      "ru": "Введите название страны:",
+      "ar": "أدخل اسم البلد:"
+    },
+    {
+      "en": "Search",
+      "fr": "Rechercher",
+      "es": "Buscar",
+      "ru": "Поиск",
+      "ar": "بحث"
+    },
+    {
+      "en": "Choose Shapefile",
+      "fr": "Choisir le Shapefile",
+      "es": "Elegir Shapefile",
+      "ru": "Выбрать шейп-файл",
+      "ar": "اختر ملف الشكل"
+    },
+    {
+      "en": "Please select a .shp file",
+      "fr": "Veuillez sélectionner un fichier .shp",
+      "es": "Por favor, seleccione un archivo .shp",
+      "ru": "Пожалуйста, выберите файл .shp",
+      "ar": "الرجاء تحديد ملف .shp"
+    },
+    {
+      "en": "Select Region Name Column:",
+      "fr": "Sélectionnez la colonne du nom de région :",
+      "es": "Seleccione la columna de nombre de región:",
+      "ru": "Выберите столбец с названием региона:",
+      "ar": "حدد عمود اسم المنطقة:"
+    },
+    {
+      "en": "Select Region Code Column:",
+      "fr": "Sélectionnez la colonne du code de région :",
+      "es": "Seleccione la columna de código de región:",
+      "ru": "Выберите столбец с кодом региона:",
+      "ar": "حدد عمود رمز المنطقة:"
+    },
+    {
+      "en": "Show Polygons",
+      "fr": "Afficher les polygones",
+      "es": "Mostrar polígonos",
+      "ru": "Показать полигоны",
+      "ar": "إظهار المضلعات"
+    },
+    {
+      "en": "Download Results",
+      "fr": "Télécharger les résultats",
+      "es": "Descargar resultados",
+      "ru": "Скачать результаты",
+      "ar": "تنزيل النتائج"
+    },
+    {
+      "en": "Enter Location ID",
+      "fr": "Entrez l'ID de l'emplacement",
+      "es": "Ingrese el ID de ubicación",
+      "ru": "Введите ID местоположения",
+      "ar": "أدخل معرف الموقع"
+    },
+    {
+      "en": "Location ID:",
+      "fr": "ID de l'emplacement :",
+      "es": "ID de ubicación:",
+      "ru": "ID местоположения:",
+      "ar": "معرف الموقع:"
+    },
+    {
+      "en": "Cancel",
+      "fr": "Annuler",
+      "es": "Cancelar",
+      "ru": "Отмена",
+      "ar": "إلغاء"
+    },
+    {
+      "en": "Save",
+      "fr": "Enregistrer",
+      "es": "Guardar",
+      "ru": "Сохранить",
+      "ar": "حفظ"
+    },
+    {
+      "en": "ID",
+      "fr": "ID",
+      "es": "ID",
+      "ru": "ID",
+      "ar": "المعرف"
+    },
+    {
+      "en": "Latitude",
+      "fr": "Latitude",
+      "es": "Latitud",
+      "ru": "Широта",
+      "ar": "خط العرض"
+    },
+    {
+      "en": "Longitude",
+      "fr": "Longitude",
+      "es": "Longitud",
+      "ru": "Долгота",
+      "ar": "خط الطول"
+    },
+    {
+      "en": "Region",
+      "fr": "Région",
+      "es": "Región",
+      "ru": "Регион",
+      "ar": "المنطقة"
+    },
+    {
+      "en": "Code",
+      "fr": "Code",
+      "es": "Código",
+      "ru": "Код",
+      "ar": "الرمز"
+    },
+    {
+      "en": "Country not found",
+      "fr": "Pays non trouvé",
+      "es": "País no encontrado",
+      "ru": "Страна не найдена",
+      "ar": "لم يتم العثور على البلد"
+    },
+    {
+      "en": "Error reading shapefile:",
+      "fr": "Erreur lors de la lecture du shapefile :",
+      "es": "Error al leer el shapefile:",
+      "ru": "Ошибка чтения шейп-файла:",
+      "ar": "خطأ في قراءة ملف الشكل:"
+    },
+    {
+      "en": "Shapefile loaded successfully",
+      "fr": "Shapefile chargé avec succès",
+      "es": "Shapefile cargado correctamente",
+      "ru": "Шейп-файл успешно загружен",
+      "ar": "تم تحميل ملف الشكل بنجاح"
+    },
+    {
+      "en": "Unknown",
+      "fr": "Inconnu",
+      "es": "Desconocido",
+      "ru": "Неизвестно",
+      "ar": "غير معروف"
+    },
+    {
+      "en": "Error determining region:",
+      "fr": "Erreur lors de la détermination de la région :",
+      "es": "Error al determinar la región:",
+      "ru": "Ошибка определения региона:",
+      "ar": "خطأ في تحديد المنطقة:"
+    },
+    {
+      "en": "Search:",
+      "fr": "Rechercher :",
+      "es": "Buscar:",
+      "ru": "Поиск:",
+      "ar": "بحث:"
+    },
+    {
+      "en": "Show _MENU_ entries",
+      "fr": "Afficher _MENU_ entrées",
+      "es": "Mostrar _MENU_ entradas",
+      "ru": "Показать _MENU_ записей",
+      "ar": "إظهار _MENU_ مدخلات"
+    },
+    {
+      "en": "Showing _START_ to _END_ of _TOTAL_ entries",
+      "fr": "Affichage de l'entrée _START_ à _END_ sur _TOTAL_ entrées",
+      "es": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+      "ru": "Отображается с _START_ по _END_ из _TOTAL_ записей",
+      "ar": "يعرض _START_ إلى _END_ من إجمالي _TOTAL_ مدخلات"
+    },
+    {
+      "en": "First",
+      "fr": "Premier",
+      "es": "Primero",
+      "ru": "Первый",
+      "ar": "الأول"
+    },
+    {
+      "en": "Last",
+      "fr": "Dernier",
+      "es": "Último",
+      "ru": "Последний",
+      "ar": "الأخير"
+    },
+    {
+      "en": "Next",
+      "fr": "Suivant",
+      "es": "Siguiente",
+      "ru": "Следующий",
+      "ar": "التالي"
+    },
+    {
+      "en": "Previous",
+      "fr": "Précédent",
+      "es": "Anterior",
+      "ru": "Предыдущий",
+      "ar": "السابق"
+    }
+  ]
+}

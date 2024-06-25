@@ -341,47 +341,52 @@ server <- function(input, output, session) {
   #########################################
   # CONDITIONALLY IMPORT SHAPEFILE
   
-  # Fetch user's folder structure for file browser:
-  volumes <- getVolumes()()
-  
-  # Add server link to file chooser:
-  shinyFileChoose(input,
-                  id = "addshapefile",
-                  roots = volumes,
+  # Fetch user's folder structure and display in file browser:
+  shinyFileChoose(input, 
+                  id = "addshapefile", 
+                  roots = getVolumes(), 
+                  filetypes = c("", "shp"), 
                   session = session)
   
-  # Get file path from user input:
-  file_selected <- eventReactive(input$addshapefile, {
-
-    req(input$addshapefile)
-
-    parseFilePaths(volumes, input$addshapefile)
-
+  # Import shape file using this file path:
+  observeEvent(input$addshapefile, {
+    path <- parseDirPath(getVolumes(), input$addshapefile)
+    user_shp <- sf::st_read(path)
+    namecols <- names(user_shp)
   })
 
-  # Use file path to read in shape file as a reactive:
-   user_shp <- eventReactive(input$addshapefile, {
-    
-    if(!is.null(file_selected()) && 
-       nrow(file_selected()) > 0 &&
-       file.exists(file_selected()$datapath)) {
-      
-      sf::st_read(dsn = file_selected()$datapath)
-      
-    } else {
-      NULL
-    }
-  })
+  # # Get file path from user input:
+  # file_selected <- eventReactive(input$addshapefile, {
+  # 
+  #   req(input$addshapefile)
+  # 
+  #   parseFilePaths(volumes, input$addshapefile)
+  # 
+  # })
+  # 
+  # # Use file path to read in shape file as a reactive:
+  #  user_shp <- eventReactive(input$addshapefile, {
+  #   
+  #   if(!is.null(file_selected()) && 
+  #      nrow(file_selected()) > 0 &&
+  #      file.exists(file_selected()$datapath)) {
+  #     
+  #     sf::st_read(dsn = file_selected()$datapath)
+  #     
+  #   } else {
+  #     NULL
+  #   }
+  # })
   
   
   # Get column names from shapefile:
    
   eventReactive(input$addshapefile, {
     
-    if(!is.null(user_shp())) {
+    if(!is.null(user_shp)) {
       
       # Extract list of column names from shapefile:
-      sfcolnames <- colnames(user_shp())
+      sfcolnames <- colnames(user_shp)
       
       # Provide list of shapefile column names to choose region name col from:
       updateSelectInput(session,
@@ -466,17 +471,17 @@ server <- function(input, output, session) {
   observeEvent(input$addshapefile, {
     
     # Add polygons if available:
-    if(!is.null(user_shp())) {
+    if(!is.null(user_shp)) {
       
       # Update the map to include shapefile overlay:
       leafletProxy('map') %>%
         
         # Add transformed shapefile of regions
-        addPolygons(data = user_shp(),
+        addPolygons(data = user_shp,
                     weight = 1,
                     color = "black",
                     fillColor = "lightgrey",
-                    popup = user_shp()$sf_names())
+                    popup = user_shp$sf_names())
       
     }
     
@@ -545,7 +550,7 @@ server <- function(input, output, session) {
   # Add region names and codes if shapefile is provided:
   observeEvent(input$addshapefile, {
 
-    if(!is.null(user_shp())) {
+    if(!is.null(user_shp)) {
 
       # Create a new table to hold the updates:
       new_tab <- tab() %>%
@@ -556,13 +561,13 @@ server <- function(input, output, session) {
         # Add region name:
         mutate(Region = get_region(lat = Latitude, 
                                    long = Longitude, 
-                                   shapefile = user_shp(), 
+                                   shapefile = user_shp, 
                                    col2return = sf_names())) %>% 
         
         # Add region code:
         mutate(Code = get_region(lat = Latitude, 
                                  long = Longitude, 
-                                 shapefile = user_shp(), 
+                                 shapefile = user_shp, 
                                  col2return = sf_pcodes()))
       
 
