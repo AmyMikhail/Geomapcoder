@@ -203,6 +203,22 @@
       "es": "Anterior",
       "ru": "Предыдущий",
       "ar": "السابق"
+    },
+    {
+      "en": "No data available in table",
+      "fr": "Aucune donnée disponible dans le tableau",
+      "es": "No hay datos disponibles en la tabla",
+      "ru": "Нет данных в таблице",
+      "ar": "لا توجد بيانات متاحة في الجدول"
+    },
+    {
+      "en": "Markers",
+      "fr": "Marqueurs",
+      "es": "Marcadores",
+      "ru": "Маркеры",
+      "ar": "علامات"
     }
   ]
 }
+
+
