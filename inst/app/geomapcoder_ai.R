@@ -15,6 +15,7 @@ pacman::p_load(shiny,
 i18n <- Translator$new(translation_json_path = "translation.json")
 i18n$set_translation_language("en")
 
+# Create UI
 ui <- fluidPage(titlePanel(
   div(
     style = "display: flex; justify-content: space-between; align-items: center;",
@@ -55,6 +56,7 @@ ui <- fluidPage(titlePanel(
   )
 ))
 
+# Create server:
 server <- function(input, output, session) {
   # Reactive value for current language
   current_language <- reactiveVal("en")
@@ -289,6 +291,7 @@ server <- function(input, output, session) {
       })
     }
     
+    # Add ID, GPS and region of clicked locations to a table:
     new_location <- data.frame(
       ID = input$location_id,
       Latitude = as.numeric(click$lat),
@@ -298,10 +301,12 @@ server <- function(input, output, session) {
       stringsAsFactors = FALSE
     )
     
+    # Update table with additional clicked locations:
     current_locations <- selected_locations()
     updated_locations <- rbind(current_locations, new_location)
     selected_locations(updated_locations)
     
+    # Update map with markers for clicked locations:
     leafletProxy("map") %>%
       addMarkers(
         lng = click$lng,
